@@ -62,13 +62,13 @@ export default {
 	data() {},
 	head() {
 		return {
-			title: this.values.title,
+			title: "Blog",
 			meta: [
 				// hid is used as unique identifier. Do not use `vmid` for it as it will not work
 				{
 					hid: "description",
 					name: "description",
-					content: "My custom description"
+					content: "My blog"
 				}
 			]
 		};
