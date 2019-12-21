@@ -10,7 +10,6 @@
 			bottom
 			right
 		>
-			Back to Top
 			<v-icon large>mdi-chevron-up</v-icon>
 		</v-btn>
 	</v-flex>
