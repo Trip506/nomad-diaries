@@ -11,18 +11,6 @@
 						<v-list-item-title v-text="item.title" />
 					</v-list-item-content>
 				</v-list-item>
-
-				<v-list-item v-for="(item, index) in $store.state.navigation.entries" :key="index" router exact>
-					<v-list-item-action>
-						<v-icon>mdi-hospital</v-icon>
-					</v-list-item-action>
-
-					<v-list-item-content>
-						<a :href="'/practices/' + item.slug">
-							<v-list-item-title>{{item.title}}</v-list-item-title>
-						</a>
-					</v-list-item-content>
-				</v-list-item>
 			</v-list>
 		</v-navigation-drawer>
 
@@ -30,16 +18,12 @@
 		<v-app-bar class="primary accent--text" :clipped-left="clipped" fixed app>
 			<v-app-bar-nav-icon color="accent lighten-1" @click.stop="drawer = !drawer" />
 
-			<v-toolbar-title
-				style="cursor:pointer;"
-				@click="go('/')"
-				class="toolbar-title title-cursive"
-				v-text="$store.state.name"
-			/>
+			<v-toolbar-title style="cursor:pointer;" @click="go('/')" class="toolbar-title title-cursive">
+				{{$store.state.name}}
+				<v-icon large color="accent" style="margin-left:10px">mdi-earth</v-icon>
+			</v-toolbar-title>
+
 			<v-spacer />
-			<!-- <v-btn icon @click.stop="rightDrawer = !rightDrawer">
-				<v-icon>mdi-menu</v-icon>
-			</v-btn>-->
 
 			<div class="accent--text">
 				Contact Us
@@ -115,6 +99,11 @@ export default {
 					icon: "mdi-chart-bubble",
 					title: "Blog",
 					to: "/blog"
+				},
+				{
+					icon: "mdi-chart-bubble",
+					title: "Services",
+					to: "/services"
 				}
 			],
 			miniVariant: false,
@@ -129,9 +118,34 @@ export default {
 		goBack() {
 			this.$router.back();
 		}
+	},
+
+	head() {
+		return {
+			link: [
+				{
+					rel: "stylesheet",
+					href:
+						"https://fonts.googleapis.com/css?family=Bebas+Neue|Lobster&display=swap"
+				}
+			]
+		};
 	}
 };
 </script>
 
 <style lang="css">
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+	font-family: "Bebas Neue";
+	letter-spacing: 2px;
+}
+
+a {
+	text-decoration: none;
+}
 </style>

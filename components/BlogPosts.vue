@@ -1,22 +1,32 @@
 <template>
 	<v-layout column>
-		<h1>My adventure blog</h1>
-		<BlogPost v-for="(item, index) in props" :key="index" :props="item"></BlogPost>
-		<BlogPost v-for="(item, index) in $store.state.loadedBlogEntries[0]" :key="index" :props="item"></BlogPost>
+		<!-- Blog items called on page load -->
+		<BlogPreview v-for="(item, index) in props" :key="index" :content="item"></BlogPreview>
 
-		<v-btn color="success" @click="fetch()">GET MORE</v-btn>
+		<!-- Additional blog items saved in store -->
+
+		<div v-for="(item, ind) in ip" :key="ind">
+			<BlogPreview v-for="(item, i) in ip[ind]" :key="i" :content="item"></BlogPreview>
+		</div>
+
+		<v-layout justify-center align-content-center>
+			<v-progress-circular v-if="noLoad == false" :size="70" :width="5" color="info" indeterminate></v-progress-circular>
+		</v-layout>
 	</v-layout>
 </template>
 
 <script>
 export default {
 	components: {
-		BlogPost: () => import("@/components/BlogPost")
+		BlogPreview: () => import("@/components/BlogPreview")
 	},
 	props: ["props"],
 	data() {
 		return {
-			ip: ""
+			ip: [],
+			more: 3,
+			skip: 3,
+			noLoad: false
 		};
 	},
 	methods: {
@@ -29,14 +39,39 @@ export default {
 					"?token=" +
 					this.$store.state.collectionsToken,
 				{
-					limit: 5,
-					skip: 5,
+					limit: 3,
+					skip: this.skip,
 					sort: { _created: -1 }
 				}
 			);
+			this.ip.push(ip.entries);
+			this.skip = this.skip + ip.entries.length;
+			this.more = ip.entries.length;
 
-			this.$store.commit("loadBlogEntries", ip.entries);
+			if (ip.entries.length < 3) {
+				this.noLoad = true;
+			}
+		},
+
+		scroll() {
+			window.onscroll = () => {
+				let bottomOfWindow =
+					Math.max(
+						window.pageYOffset,
+						document.documentElement.scrollTop,
+						document.body.scrollTop
+					) +
+						window.innerHeight ===
+					document.documentElement.offsetHeight;
+
+				if (bottomOfWindow && this.noLoad == false) {
+					this.fetch();
+				}
+			};
 		}
+	},
+	mounted() {
+		this.scroll();
 	}
 };
 </script>

@@ -4,11 +4,10 @@
 			<v-slide-y-transition>
 				<v-layout mx-5 my-5 row wrap v-show="show">
 					<v-flex v-for="(item, index) in props" :key="index" xs12 sm6 md4>
-						<div class="display-1 font-weight-thin">
-							<v-icon large color="secondary">{{item.value.icon}}</v-icon>
+						<div class="primary--text">
+							<v-icon large color="primary">{{item.value.icon}}</v-icon>
 							<v-spacer></v-spacer>
-
-							{{item.value.text}}
+							<h1>{{item.value.text}}</h1>
 						</div>
 					</v-flex>
 				</v-layout>

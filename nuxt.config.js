@@ -53,7 +53,7 @@ export default {
   generate: {
     routes: function () {
 
-      return axios.post("https://cms.hackmylanguage.com/api/collections/get/blog?token=fc6c7faa21c0678f849f0d34e6f664",
+      let blog = axios.post("https://cms.hackmylanguage.com/api/collections/get/blog?token=fc6c7faa21c0678f849f0d34e6f664",
         {
 
           fields: { slug: 1, _id: 0 }
@@ -62,6 +62,19 @@ export default {
           return res.data.entries.map((entry) => {
             return {
               route: '/blog/' + entry.slug
+            }
+
+          })
+        });
+      let services = axios.post("https://cms.hackmylanguage.com/api/collections/get/services?token=fc6c7faa21c0678f849f0d34e6f664",
+        {
+
+          fields: { slug: 1, _id: 0 }
+        })
+        .then((res) => {
+          return res.data.entries.map((entry) => {
+            return {
+              route: '/services/' + entry.slug
             }
 
           })
@@ -79,9 +92,9 @@ export default {
       //       })
       //     });
 
-      // return Promise.all([paintings, prints]).then(values => {
-      //   return [...values[0], ...values[1]]
-      // })
+      return Promise.all([blog, services]).then(values => {
+        return [...values[0], ...values[1]]
+      })
     },
 
   },

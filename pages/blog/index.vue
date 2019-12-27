@@ -40,7 +40,6 @@
 <script>
 export default {
 	components: {
-		Practices: () => import("@/components/Practices"),
 		Gallery: () => import("@/components/Gallery")
 	},
 

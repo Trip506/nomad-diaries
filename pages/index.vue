@@ -1,6 +1,6 @@
 <template>
 	<div>
-		<HeaderImage :props="singleton.header_image"></HeaderImage>
+		<HeaderImage :image="singleton.header_image" :title="singleton.title"></HeaderImage>
 
 		<Mission :props="singleton.icons"></Mission>
 
@@ -9,19 +9,52 @@
 		<!-- ABOUT -->
 		<v-container grid-list-xs>
 			<v-divider></v-divider>
-			<v-layout my-5 column>
-				<h1>{{singleton.title}}</h1>
+
+			<v-layout column>
 				<About :props="singleton.text"></About>
 			</v-layout>
 		</v-container>
 
-		<v-container>
-			<Gallery :props="singleton.gallery"></Gallery>
-		</v-container>
+		<!-- ABOUT SERVICES -->
+		<div class="section">
+			<v-layout column wrap justify-center align-content-center>
+				<v-img
+					class="d-flex"
+					position="center"
+					height="150"
+					width="150"
+					:src="require('@/assets/sitting.png')"
+				></v-img>
 
-		<v-container>
-			<BlogPosts class="section" :props="collection"></BlogPosts>
-		</v-container>
+				<h1 class="primary--text main-title">Working</h1>
+			</v-layout>
+			<v-container grid-list-xs>
+				<v-layout my-5 column>
+					<About :props="singleton.about_services"></About>
+				</v-layout>
+			</v-container>
+		</div>
+
+		<!-- SERVICES -->
+		<Services :props="services"></Services>
+
+		<!-- BLOG -->
+		<div class="section">
+			<v-container>
+				<v-layout column wrap justify-center align-content-center>
+					<v-img
+						class="d-flex"
+						position="center"
+						height="150"
+						width="150"
+						:src="require('@/assets/sitting.png')"
+					></v-img>
+					<h1 class="primary--text main-title">Travels</h1>
+				</v-layout>
+				<About :props="singleton.about_blog"></About>
+				<BlogPosts class="section" :props="collection"></BlogPosts>
+			</v-container>
+		</div>
 	</div>
 </template>
 
@@ -29,21 +62,31 @@
 <script>
 export default {
 	async asyncData({ $axios, route, store }) {
-		let collection = "blog";
+		let collection1 = "blog";
+		let collection2 = "services";
 		let singleton = "home";
 
-		//Get collection
+		//Get  blog
 		let request1 = await $axios.post(
 			store.state.webRoot +
 				"/api/collections/get/" +
-				collection +
+				collection1 +
 				"?token=" +
 				store.state.collectionsToken,
-			{ limit: 5, sort: { _created: -1 } }
+			{ limit: 3, sort: { _created: -1 } }
 		);
 
+		//Get services
+		let request2 = await $axios.post(
+			store.state.webRoot +
+				"/api/collections/get/" +
+				collection2 +
+				"?token=" +
+				store.state.collectionsToken,
+			{ limit: 3 }
+		);
 		//Get singleton
-		let request2 = await $axios.get(
+		let request3 = await $axios.get(
 			store.state.webRoot +
 				"/api/singletons/get/" +
 				singleton +
@@ -52,7 +95,8 @@ export default {
 		);
 		return {
 			collection: request1.data.entries,
-			singleton: request2.data
+			services: request2.data.entries,
+			singleton: request3.data
 		};
 	},
 
@@ -63,7 +107,8 @@ export default {
 		Feedback: () => import("@/components/Feedback"),
 		HeaderImage: () => import("@/components/HeaderImage"),
 		Mission: () => import("@/components/Mission"),
-		OpeningTimes: () => import("@/components/OpeningTimes")
+		OpeningTimes: () => import("@/components/OpeningTimes"),
+		Services: () => import("@/components/Services")
 	},
 	data() {
 		return {
@@ -104,8 +149,14 @@ export default {
 </script>
 
 
+
+
 <style lang="css">
 .section {
-	margin: 4vh 0;
+	margin: 5vh 0;
+}
+
+.main-title {
+	font-size: 60px;
 }
 </style>

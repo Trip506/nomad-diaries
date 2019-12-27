@@ -39,7 +39,7 @@ export const mutations = {
     addToCart: (state, payload) => (state.cart.push(payload)),
     setNavigation: (state, payload) => (state.navigation = payload),
     setPage: (state, payload) => (state.page = payload),
-    loadBlogEntries: (state, payload) => (state.loadedBlogEntries.push(payload))
+
 
 }
 
