@@ -126,7 +126,7 @@ export default {
 				{
 					rel: "stylesheet",
 					href:
-						"https://fonts.googleapis.com/css?family=Bebas+Neue|Lobster&display=swap"
+						"https://fonts.googleapis.com/css?family=Bebas+Neue&display=swap"
 				}
 			]
 		};

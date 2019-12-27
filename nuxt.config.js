@@ -1,4 +1,4 @@
-import colors from 'vuetify/es5/util/colors'
+// import colors from 'vuetify/es5/util/colors'
 import axios from 'axios'
 
 
@@ -79,18 +79,7 @@ export default {
 
           })
         });
-      //   let prints = axios.post("http://localhost/api/collections/get/prints?token=7915796cfc0e36b8e176365f73a329",
-      //     {
 
-      //       fields: { permalink: 1, _id: 0 }
-      //     })
-      //     .then((res) => {
-      //       return res.data.entries.map((entry) => {
-      //         return {
-      //           route: '/stuff/' + entry.permalink
-      //         }
-      //       })
-      //     });
 
       return Promise.all([blog, services]).then(values => {
         return [...values[0], ...values[1]]
@@ -114,8 +103,8 @@ export default {
           accent: '#FFFFFF',
           secondary: '#b5afa3',
           info: '#D8D6D8',
-          warning: colors.amber.base,
-          error: colors.deepOrange.accent4,
+          warning: '#D8D6D8',
+          error: '#D8D6D8',
           success: '#4CAF50', //#94c8ed
           text: "#FFFFFF"
 
