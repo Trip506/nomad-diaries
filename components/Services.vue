@@ -5,7 +5,7 @@
 			<v-layout row>
 				<v-flex xs12 md4 v-for="(item, index) in props" :key="index">
 					<nuxt-link :to="'/services/' + item.slug">
-						<v-card elevation="5" color="info ">
+						<v-card @hover="raise()" elevation="5" color="info ">
 							<v-card-media>
 								<v-img
 									height="200"
@@ -40,4 +40,18 @@ export default {
 		};
 	}
 };
+</script>
+
+<script type="application/ld+json">
+{
+  "@context" : "http://schema.org",
+  "@type" : "Product",
+  "name" : "Language Lessons",
+  "image" : "https://dazzling-brown-169358.netlify.com/services/language-lessons/",
+  "description" : "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum",
+  "brand" : {
+    "@type" : "Brand",
+    "name" : "Sam's Nomad Diaries"
+  }
+}
 </script>
