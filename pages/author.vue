@@ -1,5 +1,5 @@
 <template>
-	<div></div>
+	<div>Sam Furneaux is a great person</div>
 </template>
 
 <script>
