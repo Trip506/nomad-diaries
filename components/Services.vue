@@ -55,13 +55,17 @@ export default {
 	},
 
 	jsonld() {
+		const items = this.props.map((item, index) => ({
+			"@type": "Product",
+			position: index + 1,
+			item: {
+				name: item.title
+			}
+		}));
 		return {
 			"@context": "http://schema.org",
-			"@type": "Product",
-			description:
-				"0.7 cubic feet countertop microwave. Has six preset cooking categories and convenience features like Add-A-Minute and Child Lock.",
-			name: 'Kenmore White 17" Microwave',
-			image: "kenmore-microwave-17in.jpg"
+			"@type": "ItemList",
+			itemListElement: items
 		};
 	}
 };
