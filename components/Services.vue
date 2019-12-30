@@ -16,9 +16,7 @@
 							<v-card-title class="accent--title">
 								<h2 class="accent--text">{{item.title}}</h2>
 							</v-card-title>
-							<v-card-text>
-								<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum</p>
-							</v-card-text>
+							<v-card-text>{{item.description}}</v-card-text>
 							<!-- <v-card-actions>
 								<v-btn nuxt :to="'/services/'+item.slug" color="success">Explore</v-btn>
 								
@@ -27,6 +25,7 @@
 					</nuxt-link>
 				</v-flex>
 			</v-layout>
+			{{props[0]}}
 		</v-container>
 	</div>
 </template>
@@ -57,10 +56,8 @@ export default {
 	jsonld() {
 		const items = this.props.map((item, index) => ({
 			"@type": "Product",
-			position: index + 1,
-			item: {
-				name: item.title
-			}
+			name: item.title,
+			description: item.description
 		}));
 		return {
 			"@context": "http://schema.org",
