@@ -24,6 +24,7 @@ export default {
 
 	jsonld() {
 		return {
+			"@context": "http://schema.org",
 			"@type": "IndividualProduct",
 			name: this.props.title,
 			description: this.props.preview,
