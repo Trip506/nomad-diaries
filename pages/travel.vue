@@ -4,12 +4,12 @@
 
 <script>
 export default {
-	jsonld() {
-		return {
-			"@context": "http://schema.org",
-			"@type": "product",
-			name: "My nice product "
-		};
-	}
+	// jsonld() {
+	// 	return {
+	// 		"@context": "http://schema.org",
+	// 		"@type": "product",
+	// 		name: "My nice product "
+	// 	};
+	// }
 };
 </script>
