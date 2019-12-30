@@ -20,16 +20,16 @@
 
 <script>
 export default {
-	props: ["props"],
+	props: ["props"]
 
-	jsonld() {
-		return {
-			"@context": "http://schema.org",
-			"@type": "IndividualProduct",
-			name: this.props.title,
-			description: this.props.preview,
-			image: this.store.state.assetRoot + props.image.path
-		};
-	}
+	// jsonld() {
+	// 	return {
+	// 		"@context": "http://schema.org",
+	// 		"@type": "IndividualProduct",
+	// 		name: this.props.title,
+	// 		description: this.props.preview,
+	// 		image: this.store.state.assetRoot + props.image.path
+	// 	};
+	// }
 };
 </script>
