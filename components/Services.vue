@@ -16,7 +16,7 @@
 							<v-card-title class="accent--title">
 								<h2 class="accent--text">{{item.title}}</h2>
 							</v-card-title>
-							<v-card-text>{{item.description}}</v-card-text>
+							<v-card-text>{{item.preview}}</v-card-text>
 							<!-- <v-card-actions>
 								<v-btn nuxt :to="'/services/'+item.slug" color="success">Explore</v-btn>
 								
@@ -50,19 +50,6 @@ export default {
 					text: "bar"
 				}
 			]
-		};
-	},
-
-	jsonld() {
-		const items = this.props.map((item, index) => ({
-			"@type": "Product",
-			name: item.title,
-			description: item.description
-		}));
-		return {
-			"@context": "http://schema.org",
-			"@type": "ItemList",
-			itemListElement: items
 		};
 	}
 };

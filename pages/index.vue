@@ -144,6 +144,19 @@ export default {
 				}
 			]
 		};
+	},
+
+	jsonld() {
+		const items = this.services.map((item, index) => ({
+			"@type": "Product",
+			name: item.title,
+			description: item.preview
+		}));
+		return {
+			"@context": "http://schema.org",
+			"@type": "ItemList",
+			itemListElement: items
+		};
 	}
 };
 </script>
