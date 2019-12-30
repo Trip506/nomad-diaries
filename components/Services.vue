@@ -36,22 +36,33 @@ export default {
 	props: ["props"],
 	data() {
 		return {
-			values: this.$store.state.navigation.entries
+			values: this.$store.state.navigation.entries,
+			breadcrumbs: [
+				{
+					url: "https://example.com",
+					text: "top page"
+				},
+				{
+					url: "https://example.com/foo",
+					text: "foo"
+				},
+				{
+					url: "https://example.com/foo/bar",
+					text: "bar"
+				}
+			]
+		};
+	},
+
+	jsonld() {
+		return {
+			"@context": "http://schema.org",
+			"@type": "Product",
+			description:
+				"0.7 cubic feet countertop microwave. Has six preset cooking categories and convenience features like Add-A-Minute and Child Lock.",
+			name: 'Kenmore White 17" Microwave',
+			image: "kenmore-microwave-17in.jpg"
 		};
 	}
 };
-</script>
-
-<script type="application/ld+json">
-{
-  "@context" : "http://schema.org",
-  "@type" : "Product",
-  "name" : "Language Lessons",
-  "image" : "https://dazzling-brown-169358.netlify.com/services/language-lessons/",
-  "description" : "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum",
-  "brand" : {
-    "@type" : "Brand",
-    "name" : "Sam's Nomad Diaries"
-  }
-}
 </script>
