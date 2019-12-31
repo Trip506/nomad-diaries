@@ -80,10 +80,23 @@ export default {
 
           })
         });
+      let articles = axios.post("https://cms.hackmylanguage.com/api/collections/get/articles?token=fc6c7faa21c0678f849f0d34e6f664",
+        {
+
+          fields: { slug: 1, _id: 0 }
+        })
+        .then((res) => {
+          return res.data.entries.map((entry) => {
+            return {
+              route: '/articles/' + entry.slug
+            }
+
+          })
+        });
 
 
-      return Promise.all([blog, services]).then(values => {
-        return [...values[0], ...values[1]]
+      return Promise.all([blog, services, articles]).then(values => {
+        return [...values[0], ...values[1], ...values[2]]
       })
     },
 
