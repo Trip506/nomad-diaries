@@ -6,6 +6,19 @@
 				<v-flex my-5 xs12 md7>
 					<h1>{{values.title}}</h1>
 					<div v-html="values.content"></div>
+
+					<v-container grid-list-lg fluid>
+						<v-layout row wrap>
+							<v-flex xs2 v-for="(keyword, index) in values.keywords" :key="index">
+								<v-card color="info">
+									<v-card-text>
+										<v-icon :color="values.image.colors[index]">mdi-tag</v-icon>
+										{{keyword}}
+									</v-card-text>
+								</v-card>
+							</v-flex>
+						</v-layout>
+					</v-container>
 				</v-flex>
 				<v-flex xs12 md5>
 					<Gallery :props="values.gallery"></Gallery>
@@ -14,11 +27,11 @@
 		</v-container>
 
 		<!-- Blog -->
-		<v-sheet color="info lighten-1">
+		<!-- <v-sheet color="info lighten-1">
 			<v-container>
 				<BlogPosts :props="blogItems"></BlogPosts>
 			</v-container>
-		</v-sheet>
+		</v-sheet>-->
 	</div>
 </template>
 
@@ -74,25 +87,17 @@ export default {
 				}
 			]
 		};
+	},
+	jsonld() {
+		return {
+			"@context": "http://schema.org",
+			"@type": "Article",
+			name: this.values.title,
+			description: this.values.preview,
+			keywords: this.values.keywords
+			// keyWord
+		};
 	}
 };
-
-// export default {
-// 	async asyncData({ $axios, route, params}) {
-// 		let collection = "bupaPractises";
-// 		let { data } = await $axios.post(
-// 			$store.state.webRoot +
-// 				"/api/collections/get/" +
-// 				collection +
-// 				"?token=" +
-// 				$store.state.bupaPractisesToken,
-// 			{
-// 				filter: { permalink: route.params.id }
-// 			}
-// 		);
-// 		return { values: data.entries[0] };
-// 	},
-// 	data() {}
-// };
 </script>
 
