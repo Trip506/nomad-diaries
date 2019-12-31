@@ -14,7 +14,7 @@
 			</v-list>
 		</v-navigation-drawer>
 
-		<!-- NAVBAr  -->
+		<!-- Navbar  -->
 		<v-app-bar class="primary accent--text" :clipped-left="clipped" fixed app>
 			<v-app-bar-nav-icon color="accent lighten-1" @click.stop="drawer = !drawer" />
 
@@ -25,10 +25,10 @@
 
 			<v-spacer />
 
-			<div class="accent--text">
+			<!-- <div class="accent--text">
 				Contact Us
 				<v-icon mr-3 color="accent lighten-1">mdi-phone-message</v-icon>
-			</div>
+			</div>-->
 		</v-app-bar>
 
 		<v-content>
@@ -51,8 +51,8 @@
 					</v-container>
 
 					<v-flex primary lighten-2 py-3 text-xs-center accent--text xs12>
-						&copy;2018 —
-						<strong>Vuetify</strong>
+						&copy;2020 —
+						<strong>Sams Nomad Diaries</strong>
 					</v-flex>
 				</v-layout>
 			</v-footer>
@@ -72,8 +72,6 @@
 				</v-list-item>
 			</v-list>
 		</v-navigation-drawer>
-
-		<!-- FOOTER  -->
 	</v-app>
 </template>
 
@@ -99,6 +97,11 @@ export default {
 					icon: "mdi-chart-bubble",
 					title: "Blog",
 					to: "/blog"
+				},
+				{
+					icon: "mdi-chart-bubble",
+					title: "Articles",
+					to: "/articles"
 				},
 				{
 					icon: "mdi-chart-bubble",
