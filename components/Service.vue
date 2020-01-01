@@ -13,6 +13,20 @@
 					<h2 class="accent--text">{{props.title}}</h2>
 				</v-card-title>
 				<v-card-text>{{props.preview}}</v-card-text>
+
+				<v-container>
+					<v-layout row>
+						<v-flex xs12 v-for="(price, index) in props.prices" :key="index">
+							<v-card-text>
+								<h2>
+									{{price.value.title}}
+									<v-icon large>mdi-package-variant-closed</v-icon>
+								</h2>
+								{{price.value.price}}
+							</v-card-text>
+						</v-flex>
+					</v-layout>
+				</v-container>
 			</v-card>
 		</nuxt-link>
 	</div>

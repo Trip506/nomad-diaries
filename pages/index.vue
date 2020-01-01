@@ -150,7 +150,13 @@ export default {
 		const items = this.services.map((item, index) => ({
 			"@type": "Product",
 			name: item.title,
-			description: item.preview
+			description: item.preview,
+			url: this.$store.state.root + "/services/" + item.slug,
+			position: index,
+			offers: {
+				"@type": "AggregateOffer",
+				lowPrice: item.prices[0].value.price
+			}
 		}));
 		return {
 			"@context": "http://schema.org",
