@@ -107,6 +107,11 @@ export default {
 					icon: "mdi-package-variant-closed",
 					title: "Services",
 					to: "/services"
+				},
+				{
+					icon: "mdi-security",
+					title: "Privacy Policy",
+					to: "/privacy-policy"
 				}
 			],
 			miniVariant: false,
