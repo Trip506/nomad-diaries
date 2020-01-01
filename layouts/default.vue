@@ -89,22 +89,22 @@ export default {
 			fixed: false,
 			navigation: [
 				{
-					icon: "mdi-apps",
+					icon: "mdi-home",
 					title: "Welcome",
 					to: "/"
 				},
 				{
-					icon: "mdi-chart-bubble",
+					icon: "mdi-map-marker-radius",
 					title: "Blog",
 					to: "/blog"
 				},
 				{
-					icon: "mdi-chart-bubble",
+					icon: "mdi-format-quote-close-outline",
 					title: "Articles",
 					to: "/articles"
 				},
 				{
-					icon: "mdi-chart-bubble",
+					icon: "mdi-package-variant-closed",
 					title: "Services",
 					to: "/services"
 				}
