@@ -152,10 +152,11 @@ export default {
 			name: item.title,
 			description: item.preview,
 			url: this.$store.state.root + "/services/" + item.slug,
-			position: index,
+			// position: index + 1,
 			offers: {
 				"@type": "AggregateOffer",
-				lowPrice: item.prices[0].value.price
+				lowPrice: item.prices[0].value.price,
+				priceCurrency: "eur"
 			}
 		}));
 		return {
