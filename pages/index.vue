@@ -1,6 +1,10 @@
 <template>
 	<div>
-		<HeaderImage :image="singleton.header_image" :title="singleton.title"></HeaderImage>
+		<HeaderImage
+			:image="singleton.header_image"
+			:title="singleton.title"
+			:subtitle="singleton.subtitle"
+		></HeaderImage>
 
 		<Mission :props="singleton.icons"></Mission>
 
