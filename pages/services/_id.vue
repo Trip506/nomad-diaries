@@ -2,7 +2,6 @@
 	<div>
 		<v-parallax max-height="300" :src="$store.state.assetRoot + values.image.path"></v-parallax>
 		<v-container>
-			<!-- {{values}} -->
 			<v-layout row wrap>
 				<v-flex my-5 xs12 md7>
 					<h1>{{values.title}}</h1>
@@ -27,7 +26,8 @@ export default {
 export default {
 	components: {
 		Gallery: () => import("@/components/Gallery"),
-		Services: () => import("@/components/Services")
+		Services: () => import("@/components/Services"),
+		ServiceJumbo: () => import("@/components/ServiceJumbo")
 	},
 
 	async asyncData({ $axios, route, store }) {
