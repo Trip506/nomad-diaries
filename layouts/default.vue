@@ -61,6 +61,9 @@
 		<!-- GO UP BUTTON  -->
 		<ScrollUpButton></ScrollUpButton>
 
+		<!-- CONTACT ME BUTTON-->
+		<Contact></Contact>
+
 		<!-- RIGHT DRAWER  -->
 		<v-navigation-drawer v-model="rightDrawer" :right="right" temporary fixed>
 			<v-list>
@@ -79,7 +82,8 @@
 export default {
 	components: {
 		LogoLink: () => import("@/components/core/LogoLink"),
-		ScrollUpButton: () => import("@/components/core/ScrollUpButton")
+		ScrollUpButton: () => import("@/components/core/ScrollUpButton"),
+		Contact: () => import("@/components/core/Contact")
 	},
 
 	data() {
