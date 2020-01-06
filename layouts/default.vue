@@ -24,6 +24,11 @@
 			</v-toolbar-title>
 
 			<v-spacer />
+
+			<!-- <div class="accent--text">
+				Contact Us
+				<v-icon mr-3 color="accent lighten-1">mdi-phone-message</v-icon>
+			</div>-->
 		</v-app-bar>
 
 		<v-content>
@@ -72,26 +77,11 @@
 
 <script>
 export default {
-	async asyncData({ $axios, route, store }) {
-		let singleton = "privacyPolicy";
-
-		//Get collection
-		let request1 = await $axios.post(
-			store.state.webRoot +
-				"/api/singletons/get/" +
-				singleton +
-				"?token=" +
-				store.state.singletonsToken
-		);
-
-		return {
-			valuess: request1.data
-		};
-	},
 	components: {
 		LogoLink: () => import("@/components/core/LogoLink"),
 		ScrollUpButton: () => import("@/components/core/ScrollUpButton")
 	},
+
 	data() {
 		return {
 			clipped: false,

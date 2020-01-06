@@ -3,7 +3,11 @@
 		<v-container grid-list-lg>
 			<v-layout row wrap>
 				<!-- Preview -->
-				<v-flex xs12 md3>
+				<v-flex xs12 md8>
+					<h2>{{content.title}}</h2>
+					{{content.preview}}
+				</v-flex>
+				<v-flex xs12 md4>
 					<!-- <nuxt-link :to="'/blog/'+content.slug"> -->
 					<v-img
 						height="200"
@@ -18,41 +22,12 @@
 					</v-img>
 					<!-- </nuxt-link> -->
 				</v-flex>
-				<v-flex xs12 md9>
-					<h2>{{content.title}}</h2>
-					{{content.preview}}
-					<!-- <v-flex > -->
-					<v-layout v-if="show && loadedEntry" row wrap>
-						<v-flex xs12 md8>
-							<div v-html="loadedEntry.content"></div>
-							<br />
-							Published
-							{{getDate(loadedEntry._created)}}
-						</v-flex>
-
-						<v-flex xs12 md4>
-							<Map v-if="loadedEntry.location" :location="loadedEntry.location.address" zoom="6"></Map>
-
-							<Gallery :props="loadedEntry.gallery"></Gallery>
-						</v-flex>
-						<v-container>
-							<v-layout column align-start>
-								<v-btn color="secondary" @click="show=!show">
-									Hide
-									<v-icon large>mdi-chevron-up</v-icon>
-								</v-btn>
-							</v-layout>
-						</v-container>
-					</v-layout>
-					<!-- </v-flex> -->
-				</v-flex>
 
 				<!-- Show more button -->
 				<v-flex>
-					<v-layout column align-start>
+					<v-layout column justify-center align-center>
 						<v-flex>
-							<v-btn color="secondary" v-if="!show" @click="fetch(content.slug),show = !show">
-								Read more
+							<v-btn color="info" v-if="!show" @click="fetch(content.slug),show = !show">
 								<v-icon large>mdi-chevron-down</v-icon>
 							</v-btn>
 						</v-flex>
@@ -68,6 +43,29 @@
 				</v-flex>
 
 				<!-- Extended blog post -->
+				<v-flex v-if="show">
+					<v-layout v-if="loadedEntry" row wrap>
+						<v-flex xs12 md8>
+							<div v-html="loadedEntry.content"></div>
+							<br />
+							Published
+							{{getDate(loadedEntry._created)}}
+						</v-flex>
+
+						<v-flex xs12 md4>
+							<Map v-if="loadedEntry.location" :location="loadedEntry.location.address" zoom="6"></Map>
+
+							<Gallery :props="loadedEntry.gallery"></Gallery>
+						</v-flex>
+
+						<!-- {{loadedEntry._created.toLocaleDateString("en-US")}} -->
+						<v-layout column align-center justify-center>
+							<v-btn color="info" @click="show=!show">
+								<v-icon large>mdi-chevron-up</v-icon>
+							</v-btn>
+						</v-layout>
+					</v-layout>
+				</v-flex>
 			</v-layout>
 		</v-container>
 		<br />
