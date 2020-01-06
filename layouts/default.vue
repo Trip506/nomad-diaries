@@ -109,6 +109,11 @@ export default {
 					to: "/services"
 				},
 				{
+					icon: "mdi-contact-mail",
+					title: "Contact",
+					to: "/contact"
+				},
+				{
 					icon: "mdi-security",
 					title: "Privacy Policy",
 					to: "/privacy-policy"
