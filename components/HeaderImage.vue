@@ -1,6 +1,6 @@
 <template>
 	<v-img
-		height="500"
+		height="600"
 		:src="$store.state.assetRoot + image.path"
 		:lazy-src="$store.state.webRoot+'/api/cockpit/image?token='+$store.state.imageToken+'&src='+image._id+'&w=200&h=200&o=true'"
 	>

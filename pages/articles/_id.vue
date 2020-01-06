@@ -95,7 +95,6 @@ export default {
 			name: this.values.title,
 			description: this.values.preview,
 			keywords: this.values.keywords
-			// keyWord
 		};
 	}
 };

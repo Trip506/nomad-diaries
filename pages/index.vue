@@ -6,21 +6,23 @@
 			:subtitle="singleton.subtitle"
 		></HeaderImage>
 
-		<Mission :props="singleton.icons"></Mission>
+		<!-- <Mission :props="singleton.icons"></Mission> -->
 
 		<!-- <Practices></Practices> -->
 
 		<!-- ABOUT -->
-		<v-container grid-list-xs>
-			<v-divider></v-divider>
+		<v-container fluid class="secondary">
+			<!-- <v-divider></v-divider> -->
 
 			<v-layout column>
-				<About :props="singleton.text"></About>
+				<v-flex>
+					<About :props="singleton.text"></About>
+				</v-flex>
 			</v-layout>
 		</v-container>
 
 		<!-- ABOUT SERVICES -->
-		<div class="section">
+		<!-- <div class="section">
 			<v-layout column wrap justify-center align-content-center>
 				<v-img
 					class="d-flex"
@@ -37,10 +39,10 @@
 					<About :props="singleton.about_services"></About>
 				</v-layout>
 			</v-container>
-		</div>
+		</div>-->
 
 		<!-- SERVICES -->
-		<Services :props="services"></Services>
+		<!-- <Services :props="services"></Services> -->
 
 		<!-- BLOG -->
 		<div class="section">
