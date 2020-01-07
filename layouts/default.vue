@@ -61,8 +61,8 @@
 		<!-- GO UP BUTTON  -->
 		<ScrollUpButton></ScrollUpButton>
 
-		<!-- CONTACT ME BUTTON-->
-		<Contact></Contact>
+		<!-- CONTACT ME BUTTON
+		<Contact></Contact>-->
 
 		<!-- RIGHT DRAWER  -->
 		<v-navigation-drawer v-model="rightDrawer" :right="right" temporary fixed>

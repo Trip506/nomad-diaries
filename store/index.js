@@ -17,6 +17,8 @@ export const state = () => ({
     // For getting thumbnails
     imageToken: '77f3abfbb1ab1ecd0d339031fb209f',
 
+    //Form Token
+    formToken: '1e4cfae2425ece6599cf254d9de494',
 
 
 

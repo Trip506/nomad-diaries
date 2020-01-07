@@ -1,20 +1,10 @@
 <template>
     <div>
-        <v-btn color="primary" dark
-        @click="snackbar = true">
+        <v-btn color="primary" dark @click="snackbar = true">
         Contact me
         </v-btn>
     <v-snackbar
-        color="info"
-        v-model="snackbar"
-        :bottom="y === 'bottom'"
-        :left="x === 'left'"
-        :multi-line="mode === 'multi-line'"
-        :right="x === 'right'"
-        :timeout="timeout"
-        :top="y === 'top'"
-        :vertical="mode === 'vertical'"
-    >
+        color="info" v-model="snackbar" :bottom="y === 'bottom'" :left="x === 'left'" :multi-line="mode === 'multi-line'" :right="x === 'right'" :timeout="timeout" :top="y === 'top'" :vertical="mode === 'vertical'">
         <v-card width="240px" color="info">
             <v-card-title primary-title>
                <p> {{values.title}} </p>
@@ -25,11 +15,7 @@
        <p><v-icon>mdi-account</v-icon> {{values.full_name}} </p>
             </v-card-text>
         </v-card>
-      <v-btn
-        color="grey darken-2"
-        flat
-        @click="snackbar = false"
-      >
+      <v-btn color="grey darken-2" flat @click="snackbar = false">
         Close
       </v-btn>
     </v-snackbar>
@@ -38,29 +24,28 @@
 
 <script>
 export default {
-    async asyncData({ $axios, route, store }) {
-        let singleton = "contact";
+  async asyncData({ $axios, route, store }) {
+    let singleton = "contact";
 
-		//Get collection
-		let request1 = await $axios.post(
-            store.state.webRoot +
-				"/api/singletons/get/" +
-				singleton +
-				"?token=" +
-				store.state.singletonsToken
-		);
-
-		return {
-            values: request1.data
-		};
-	},
-    data () {
+    //Get collection
+    let request1 = await $axios.post(
+      store.state.webRoot +
+        "/api/singletons/get/" +
+        singleton +
+        "?token=" +
+        store.state.singletonsToken
+    );
     return {
-        snackbar: false,
-        y: 'bottom',
-        x: null,
-        mode: '',
-           }
-        },
-}
+      values: request1.data
+    };
+  },
+  data() {
+    return {
+      snackbar: false,
+      y: "bottom",
+      x: null,
+      mode: ""
+    };
+  }
+};
 </script>
