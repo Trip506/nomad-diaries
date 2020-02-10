@@ -27,7 +27,7 @@
 				<v-flex>
 					<v-layout column justify-center align-center>
 						<v-flex>
-							<v-btn color="info" v-if="!show" @click="fetch(content.slug),show = !show">
+							<v-btn rounded color="info" v-if="!show" @click="fetch(content.slug),show = !show">
 								<v-icon large>mdi-chevron-down</v-icon>
 							</v-btn>
 						</v-flex>
@@ -40,6 +40,7 @@
 							indeterminate
 						></v-progress-circular>
 					</v-layout>
+					<v-btn color="success" @click="push(content._id)">Add text {{}}</v-btn>
 				</v-flex>
 
 				<!-- Extended blog post -->
@@ -60,7 +61,7 @@
 
 						<!-- {{loadedEntry._created.toLocaleDateString("en-US")}} -->
 						<v-layout column align-center justify-center>
-							<v-btn color="info" @click="show=!show">
+							<v-btn rounded color="info" @click="show=!show">
 								<v-icon large>mdi-chevron-up</v-icon>
 							</v-btn>
 						</v-layout>
@@ -92,6 +93,18 @@ export default {
 	},
 
 	methods: {
+		async push(id) {
+			let collection = "blog";
+			const ip = await this.$axios.$post(
+				this.$store.state.webRoot +
+					"/api/collections/save/" +
+					collection +
+					"?token=2fb04e7093a4a4c60003a17180bf01",
+				{
+					data: { _id: id, title: "hello" }
+				}
+			);
+		},
 		async fetch(slug) {
 			let collection = "blog";
 			const ip = await this.$axios.$post(

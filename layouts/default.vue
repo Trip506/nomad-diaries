@@ -118,6 +118,11 @@ export default {
 					to: "/contact"
 				},
 				{
+					icon: "mdi-contact-mail",
+					title: "Currency",
+					to: "/currencies"
+				},
+				{
 					icon: "mdi-security",
 					title: "Privacy Policy",
 					to: "/privacy-policy"
