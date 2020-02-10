@@ -3,6 +3,7 @@
 		{{data}}
 		<v-container fluid>
 			<h1>Currency Converter</h1>
+
 			<v-layout row wrap align-center>
 				<v-flex xs12 sm6>
 					<v-subheader v-text="'Select Currency'"></v-subheader>
@@ -35,6 +36,7 @@
 		</v-container>
 
 		<v-btn color="success" @click="fetch(currencyto, currencyfrom)">Get data</v-btn>
+
 		<br />
 		<br />
 		<br />
@@ -72,7 +74,7 @@ export default {
 		async fetch(to, from) {
 			let amount = this.input;
 			const ip = await this.$axios.$get(
-				"https://api.exchangeratesapi.io/latest?symbols=USD," + from + ""
+				"https://api.exchangeratesapi.io/latest?symbols=" + to + "," + from + ""
 			);
 			this.data = ip;
 		}
