@@ -38,6 +38,7 @@
 
 {{name}}
 {{email}}
+{{error}}
 
 
 
@@ -46,23 +47,20 @@
         <v-container grid-list-lg>
             <v-layout row space>
                 <v-flex xs12 md6>
-                        <v-text-field v-model="name" required :rules="[v => !!v || 'Name is required']" label="Name"></v-text-field>
+                        <v-text-field v-model="name" required :rules="nameRules" label="Name"></v-text-field>
                 </v-flex>
                 <v-flex xs12 md6>
-                        <v-text-field v-model="email" required :rules="[v => !!v || 'E-mail is required']" label="E-mail"></v-text-field>
+                        <v-text-field v-model="email" required :rules="emailRules" label="E-mail"></v-text-field>
                 </v-flex>
                 <v-flex xs12>
-                    <v-textarea v-model="text" solo label="Message"></v-textarea>
+                        <v-textarea v-model="text" solo  :rules="[v => !!v]" label="Message"></v-textarea>
                 </v-flex>
             </v-layout>
-                    <v-btn @click="submit_post">Submit</v-btn>
+                    <v-checkbox v-model="valid" label="Allow us to contact you"></v-checkbox>
+                    <v-btn @click="submit_post" :disabled="!valid">Submit</v-btn>
         </v-container>
     </v-form>
 </div>
-
-
-
-
 
 
 
@@ -72,25 +70,35 @@
 <script>
 export default {
     methods: {
-  async submit_post() {
-      let form = "contact";
-			const ip = await this.$axios.$post(
-                this.$store.state.webRoot +
-					"/api/forms/submit/" +
-					form +
-					"?token=" +
-					this.$store.state.formToken,
-				{
-                    form: {
-                            Name: this.name,
-                            Email: this.email,
-                            Text: this.text
-                            }
-				},
-            this.name='', this.email='', this.text=''
-            );
-}
-    },
+    async submit_post() {
+
+        if (name.rules && email.rules) {
+            this.error=0
+
+            let form = "contact";
+                const ip = await this.$axios.$post(
+                    this.$store.state.webRoot +
+                        "/api/forms/submit/" +
+                        form +
+                        "?token=" +
+                        this.$store.state.formToken,
+                    {
+                        form: {
+                                Name: this.name,
+                                Email: this.email,
+                                Text: this.text,
+                                Check: this.checkbox
+                                }
+                        },
+                this.name='', this.email='', this.text=''
+                );
+
+        } else {
+            this.error=1
+        }
+                            
+  }
+},
     async asyncData({ $axios, route, store }) {
         let singleton = "contact";
 
@@ -106,17 +114,29 @@ export default {
 		return {
             values: request1.data
 		};
-	},
+    },
+
     data () {
     return {
+        error: '',
         snackbar: false,
         y: 'bottom',
         x: null,
         mode: '',
+        valid: false,
+            nameRules: [
+              (v) => !!v || 'Name is required',
+              (v) => v.length <= 10 || 'Name must be less than 10 characters'
+            ],
+            emailRules: [
+              (v) => !!v || 'E-mail is required',
+              (v) => /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(v) || 'E-mail must be valid'
+            ],
         name: '',
         email: '',
         text: ''
            }
         },
+    
 };
 </script>
