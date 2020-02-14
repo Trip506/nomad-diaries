@@ -11,7 +11,7 @@
 				<v-flex xs12 sm6>
 					<v-select
 						v-model="currencyfrom"
-						:items="currencykeys"
+						:items="currencylist"
 						:menu-props="{ maxHeight: '400' }"
 						label="Select"
 						hint="Pick your currency"
@@ -26,7 +26,7 @@
 				<v-flex xs12 sm6>
 					<v-select
 						v-model="currencyto"
-						:items="currencykeys"
+						:items="currencylist"
 						label="Select"
 						hint="Pick your currency"
 						persistent-hint
@@ -36,6 +36,21 @@
 		</v-container>
 
 		<v-btn color="success" @click="fetch(currencyto, currencyfrom)">Get data</v-btn>
+
+
+		<v-card>
+			<v-card-text>
+			<p>From: <v-text-field
+				name="number"
+				id="number"
+				v-model="number"
+			></v-text-field> {{data.base}}</p>
+			<p v-for="(item, index) in data.rates" :key="index">To: {{item*number}} {{currencyto}}</p>
+			</v-card-text>
+		</v-card>
+
+
+
 
 		<br />
 		<br />
@@ -59,9 +74,16 @@ export default {
 		return {
 			currencyfrom: "",
 			currencyto: "",
+			currencylist: [
+				'USD', 'GBP', 'EUR', 'JPY', 'BGN', 'CZK', 'DKK', 'HUF', 'PLN', 'RON',
+				'SEK', 'CHF', 'ISK', 'NOK', 'HRK', 'RUB', 'TRY', 'AUD', 'BRL', 'CAD',
+				'CNY', 'HKD', 'IDR', 'ILS', 'INR', 'KRW', 'MXN', 'MYR', 'NZD', 'BHP',
+				'SGD', 'THB', 'ZAR'
+			],
 			input: "",
 			data: "",
-			currency: currency
+			currency: currency,
+			number: "1"
 		};
 	},
 
@@ -74,7 +96,7 @@ export default {
 		async fetch(to, from) {
 			let amount = this.input;
 			const ip = await this.$axios.$get(
-				"https://api.exchangeratesapi.io/latest?symbols=" + to + "," + from + ""
+				"https://api.exchangeratesapi.io/latest?base=" + from +  "&symbols=" + to
 			);
 			this.data = ip;
 		}
