@@ -1,6 +1,5 @@
 <template>
 	<div>
-<<<<<<< HEAD
         {{fetch("hello I am a function hopefully")}}
         <!--<p v-for="(item, index) in values" :key="index">{{item}}</p>-->
         <v-container grid-list-lg>
@@ -17,23 +16,23 @@
         </v-container>
 
     </div>
-=======
-		<div v-for="(item, index) in values" :key="index">{{item}}</div>
-	</div>
->>>>>>> ad7158d2e098ad42e3beaeb506b310d13e67933f
+
+
+ <div v-for="(item, index) in values" :key="index">{{item}}</div>
+ </div>
+
 </template> 
 
 <script>
 export default {
-<<<<<<< HEAD
     methods:{
         fetch(url){
             var hello=url
             return hello
         }
     },
-=======
->>>>>>> ad7158d2e098ad42e3beaeb506b310d13e67933f
+
+
 	async asyncData({ $axios, route, store }) {
 		let singleton = "privacyPolicy";
 
