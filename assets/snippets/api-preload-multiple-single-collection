@@ -1,3 +1,6 @@
+// Load blog entry of slug id and load 5 blog 
+// entries (sorted descending by creation date)
+
 async asyncData({ $axios, route, store }) {
 		let collection = "blog";
 
@@ -20,7 +23,7 @@ async asyncData({ $axios, route, store }) {
 			{ limit: 5, sort: { _created: -1 } }
 		);
 		return {
-			values: request1.data.entries[0],
+			blogItem: request1.data.entries[0],
 			blogItems: request2.data.entries
 		};
 	},
