@@ -1,13 +1,17 @@
 ////export default ////	
-    
-    async asyncData({ $axios }) {
-		let singleton = "privacyPolicy";
+	async asyncData({ $axios, route, store }) {
+		let collection = "Products";
 
 		//Get collection
-		let request1 = await $axios.post("https://swapi.co/api/people");
+		let request1 = await $axios.post(
+			store.state.webRoot +
+				"/api/collections/get/" +
+				collection +
+				"?token=" +
+				store.state.collectionsToken
+		);
 
 		return {
-			values: request1.data.results
-        };
-
-
+			values: request1.data.entries
+		};
+	},
