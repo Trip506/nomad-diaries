@@ -1,0 +1,13 @@
+////export default ////	
+    
+    async asyncData({ $axios }) {
+		let singleton = "privacyPolicy";
+
+		//Get collection
+		let request1 = await $axios.post("https://swapi.co/api/people");
+
+		return {
+			values: request1.data.results
+        };
+
+

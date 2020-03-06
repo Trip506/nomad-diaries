@@ -1,0 +1,26 @@
+async asyncData({ $axios, route, store }) {
+		let collection = "blog";
+
+		//Get collection
+		let request1 = await $axios.post(
+			store.state.webRoot +
+				"/api/collections/get/" +
+				collection +
+				"?token=" +
+				store.state.collectionsToken,
+			{ filter: { slug: route.params.id } }
+		);
+
+		let request2 = await $axios.post(
+			store.state.webRoot +
+				"/api/collections/get/" +
+				collection +
+				"?token=" +
+				store.state.collectionsToken,
+			{ limit: 5, sort: { _created: -1 } }
+		);
+		return {
+			values: request1.data.entries[0],
+			blogItems: request2.data.entries
+		};
+	},

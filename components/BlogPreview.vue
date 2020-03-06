@@ -40,7 +40,6 @@
 							indeterminate
 						></v-progress-circular>
 					</v-layout>
-					<v-btn color="success" @click="push(content._id)">Add text {{}}</v-btn>
 				</v-flex>
 
 				<!-- Extended blog post -->
