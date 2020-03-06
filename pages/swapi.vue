@@ -17,10 +17,6 @@
 
     </div>
 
-
- <div v-for="(item, index) in values" :key="index">{{item}}</div>
- </div>
-
 </template> 
 
 <script>
