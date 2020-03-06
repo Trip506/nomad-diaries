@@ -21,7 +21,7 @@
 		<div v-for="(item, index) in values" :key="index">{{item}}</div>
 	</div>
 >>>>>>> ad7158d2e098ad42e3beaeb506b310d13e67933f
-</template>
+</template> 
 
 <script>
 export default {
