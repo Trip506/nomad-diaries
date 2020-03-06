@@ -126,7 +126,12 @@ export default {
 					icon: "mdi-security",
 					title: "Privacy Policy",
 					to: "/privacy-policy"
-				}
+				},
+				{
+					icon: "mdi-home",
+					title: "Swapi",
+					to: "/swapi"
+				},
 			],
 			miniVariant: false,
 			right: true,
