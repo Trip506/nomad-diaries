@@ -36,7 +36,7 @@
           <v-btn flat color="grey lighten-1">Buy Now</v-btn>
           <v-spacer></v-spacer>
           <p v-if="item.discount_price==0" class="title" style="margin-right: 15px;">£{{item.price}}</p>
-          <p v-else class="title red--text" style="margin-right: 15px;"><span class="grey--text" style="margin-right: 15px;">£{{item.price}}</span>£{{item.discount_price}}</p><!--         -->
+          <p v-else class="title red--text" style="margin-right: 15px;"><span class="grey--text" style="margin-right: 15px;">£{{item.price}}</span>£{{item.discount_price}}</p>
         </v-card-actions>
       </v-card>
     </v-flex>
