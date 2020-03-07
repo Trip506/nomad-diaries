@@ -132,6 +132,11 @@ export default {
 					title: "Swapi",
 					to: "/swapi"
 				},
+				{
+					icon: "mdi-home",
+					title: "Shop",
+					to: "/shop"
+				},
 			],
 			miniVariant: false,
 			right: true,
