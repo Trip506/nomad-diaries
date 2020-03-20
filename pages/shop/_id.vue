@@ -1,6 +1,5 @@
 <template>
 	<div>
-    {{data2}}
     <h1 class="primary--text main-title" style="text-align: center;">Traveller Store</h1>
     <v-container grid-list-lg>
     <v-layout row wrap>
@@ -66,7 +65,8 @@ export default {
         "/api/collections/get/" +
         collection +
         "?token=" +
-        store.state.collectionsToken
+        store.state.collectionsToken,
+        { filter: { slug: route.params.id} }
     );
 
     return {
@@ -77,23 +77,13 @@ export default {
     fetch(url) {
       var hello = url;
       return hello;
-    },
-
-    async fetch(store) {
-			let amount = this.input;
-			const ip = await this.$axios.$get(
-        "https://api.exchangeratesapi.io/latest?base=GBP&symbols=" + store.state.currency
-        );
-        this.data2 = ip;
     }
   },
-  
 
   data() {
     return {
       show: false,
-      data: "",
-      data2: ""
+      data: ""
     };
   },
   filters: {

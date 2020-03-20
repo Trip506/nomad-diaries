@@ -20,7 +20,8 @@ export const state = () => ({
     //Form Token
     formToken: '1e4cfae2425ece6599cf254d9de494',
 
-
+    //CURRENCIES    
+    currency:'GBP',
 
     //COLLECTION API TOKENS GO HERE 
     assetRoot: "https://cms.hackmylanguage.com/storage/uploads",
@@ -41,6 +42,8 @@ export const mutations = {
     addToCart: (state, payload) => (state.cart.push(payload)),
     setNavigation: (state, payload) => (state.navigation = payload),
     setPage: (state, payload) => (state.page = payload),
+    setCurrency: (state, payload) => (state.currency = payload),
+
 
 
 }
@@ -65,3 +68,4 @@ export const actions = {
     // }
 
 }
+
