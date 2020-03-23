@@ -22,7 +22,9 @@
 				{{$store.state.name}}
 				<v-icon large color="accent" style="margin-left:10px">mdi-earth</v-icon>
 			</v-toolbar-title>
-
+			{{$store.state.currency}}
+			<v-btn color="success" @click="changeCurrency('EUR')">EUR</v-btn>
+			<v-btn color="success" @click="changeCurrency('GBP')">GBP</v-btn>
 			<v-spacer />
 
 			<!-- <div class="accent--text">
@@ -79,6 +81,7 @@
 </template>
 
 <script>
+import { mapMutations } from 'vuex'
 export default {
 	components: {
 		LogoLink: () => import("@/components/core/LogoLink"),
@@ -144,6 +147,10 @@ export default {
 		};
 	},
 	methods: {
+		...mapMutations(['setCurrency']),
+		changeCurrency(value){
+			this.setCurrency(value);
+		},
 		go(route) {
 			this.$router.push(route);
 		},
