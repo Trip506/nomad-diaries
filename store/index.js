@@ -20,10 +20,6 @@ export const state = () => ({
     //Form Token
     formToken: '1e4cfae2425ece6599cf254d9de494',
 
-    //CURRENCIES  
-    defaultCurrency: 'GBP',
-    currency: 'GBP',
-    exchangeRate: '1',
 
     //COLLECTION API TOKENS GO HERE 
     assetRoot: "https://cms.hackmylanguage.com/storage/uploads",
@@ -35,13 +31,24 @@ export const state = () => ({
     //Loading
     loadedBlogEntries: [],
 
+    //CURRENCIES  
+    defaultCurrency: 'GBP',
+    currency: 'GBP',
+    exchangeRate: '1',
+
+    //cart
+
+    cart: { items: [] },
+
+
 
 })
 
 
 export const mutations = {
 
-    addToCart: (state, payload) => (state.cart.push(payload)),
+    addToCart: (state, payload) => (state.cart.items.push(payload)),
+    removeFromCart: (state, payload) => (state.cart.items.splice(payload, 1)),
     setNavigation: (state, payload) => (state.navigation = payload),
     setPage: (state, payload) => (state.page = payload),
     setCurrency: (state, payload) => (state.currency = payload),
@@ -59,7 +66,6 @@ export const actions = {
     async FETCH_EXCHANGE_RATE({ commit, state }, payload) {
 
         const { data } = await axios.get("https://api.exchangeratesapi.io/latest?base=" + state.defaultCurrency + "&symbols=" + payload)
-        console.log("FETCHED EXCHANGE: " + data)
         commit('setExchangeRate', Math.round(data.rates[payload] * 100) / 100)
         commit('setCurrency', payload)
 

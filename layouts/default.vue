@@ -22,13 +22,17 @@
 				{{$store.state.name}}
 				<v-icon large color="accent" style="margin-left:10px">mdi-earth</v-icon>
 			</v-toolbar-title>
-			{{$store.state.exchangeRate}}
+
 			<!-- <v-btn color="success" @click="changeCurrency('EUR')">EUR</v-btn> -->
 			<!-- <v-btn color="success" @click="changeCurrency('GBP')">GBP</v-btn> -->
 			<v-btn color="info" @click="setCurrency('EUR')">EUR</v-btn>
 			<v-btn color="info" @click="setCurrency('GBP')">GBP</v-btn>
 			<v-btn color="info" @click="setCurrency('HRK')">HRK</v-btn>
 			<v-spacer />
+
+			<nuxt-link :to="'/cart'">
+				<v-btn color="success">Cart {{$store.state.cart.items.length}}</v-btn>
+			</nuxt-link>
 
 			<!-- <div class="accent--text">
 				Contact Us

@@ -33,7 +33,7 @@
 						</v-card-text>
 
 						<v-card-actions>
-							<v-btn flat color="grey lighten-1">Buy Now</v-btn>
+							<v-btn @click="cart(item)" flat color="grey lighten-1">Buy Now</v-btn>
 							<v-btn>
 								<nuxt-link :to="'/shop/'+item.slug" class="accent--text">Read more</nuxt-link>
 							</v-btn>
@@ -61,6 +61,8 @@
 
 <script>
 import { mapGetters } from "vuex";
+import { mapMutations } from "vuex";
+
 export default {
 	async asyncData({ $axios, route, store }) {
 		let collection = "Products";
@@ -82,6 +84,8 @@ export default {
 	computed: {},
 
 	methods: {
+		...mapMutations({ cart: "addToCart" }),
+
 		fetch(url) {
 			var hello = url;
 			return hello;
