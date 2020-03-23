@@ -20,8 +20,6 @@ export const state = () => ({
     //Form Token
     formToken: '1e4cfae2425ece6599cf254d9de494',
 
-    //CURRENCIES    
-    currency:'GBP',
 
     //COLLECTION API TOKENS GO HERE 
     assetRoot: "https://cms.hackmylanguage.com/storage/uploads",
@@ -33,16 +31,29 @@ export const state = () => ({
     //Loading
     loadedBlogEntries: [],
 
+    //CURRENCIES  
+    defaultCurrency: 'GBP',
+    currency: 'GBP',
+    exchangeRate: '1',
+
+    //cart
+
+    cart: { items: [] },
+
+
 
 })
 
 
 export const mutations = {
 
-    addToCart: (state, payload) => (state.cart.push(payload)),
+    addToCart: (state, payload) => (state.cart.items.push(payload)),
+    removeFromCart: (state, payload) => (state.cart.items.splice(payload, 1)),
     setNavigation: (state, payload) => (state.navigation = payload),
     setPage: (state, payload) => (state.page = payload),
     setCurrency: (state, payload) => (state.currency = payload),
+    setExchangeRate: (state, payload) => (state.exchangeRate = payload),
+
 
 
 
@@ -50,22 +61,19 @@ export const mutations = {
 
 export const actions = {
 
-    // nuxtServerInit({ commit, state }) {
-    //     let collection = "bupaPractices";
-    //     // console.log("inited")
-    //     return axios.post(
 
-    //         state.webRoot + "/api/collections/get/" +
-    //         collection +
-    //         "?token=" + state.collectionsToken,
-    //         {
-    //             fields: { title: 1, slug: 1, image: 1 }
-    //         }
-    //     )
-    //         .then(res => {
-    //             commit("setNavigation", res.data);
-    //         });
-    // }
 
+    async FETCH_EXCHANGE_RATE({ commit, state }, payload) {
+
+        const { data } = await axios.get("https://api.exchangeratesapi.io/latest?base=" + state.defaultCurrency + "&symbols=" + payload)
+        commit('setExchangeRate', Math.round(data.rates[payload] * 100) / 100)
+        commit('setCurrency', payload)
+
+    },
+
+}
+
+export const getters = {
+    getExchangeRate: state => state.exchangeRate
 }
 
