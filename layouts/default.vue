@@ -22,9 +22,12 @@
 				{{$store.state.name}}
 				<v-icon large color="accent" style="margin-left:10px">mdi-earth</v-icon>
 			</v-toolbar-title>
-			{{$store.state.currency}}
-			<v-btn color="success" @click="changeCurrency('EUR')">EUR</v-btn>
-			<v-btn color="success" @click="changeCurrency('GBP')">GBP</v-btn>
+			{{$store.state.exchangeRate}}
+			<!-- <v-btn color="success" @click="changeCurrency('EUR')">EUR</v-btn> -->
+			<!-- <v-btn color="success" @click="changeCurrency('GBP')">GBP</v-btn> -->
+			<v-btn color="info" @click="setCurrency('EUR')">EUR</v-btn>
+			<v-btn color="info" @click="setCurrency('GBP')">GBP</v-btn>
+			<v-btn color="info" @click="setCurrency('HRK')">HRK</v-btn>
 			<v-spacer />
 
 			<!-- <div class="accent--text">
@@ -81,7 +84,8 @@
 </template>
 
 <script>
-import { mapMutations } from 'vuex'
+import { mapMutations } from "vuex";
+import { mapActions } from "vuex";
 export default {
 	components: {
 		LogoLink: () => import("@/components/core/LogoLink"),
@@ -139,7 +143,7 @@ export default {
 					icon: "mdi-home",
 					title: "Shop",
 					to: "/shop"
-				},
+				}
 			],
 			miniVariant: false,
 			right: true,
@@ -147,10 +151,14 @@ export default {
 		};
 	},
 	methods: {
-		...mapMutations(['setCurrency']),
-		changeCurrency(value){
+		...mapMutations(["setCurrency"]),
+		changeCurrency(value) {
 			this.setCurrency(value);
 		},
+		setCurrency(value) {
+			this.$store.dispatch("FETCH_EXCHANGE_RATE", value);
+		},
+
 		go(route) {
 			this.$router.push(route);
 		},
