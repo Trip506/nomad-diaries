@@ -104,7 +104,7 @@ export default {
 	data() {
 		return {
 			historical:"",
-			value: [historical.rates],
+			//value: [historical.rates],
 			currencyfrom: "",
 			currencyto: "",
 			currencylist: [

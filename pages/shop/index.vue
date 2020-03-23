@@ -1,6 +1,7 @@
 <template>
 	<div>
-    {{data2}}
+    {{data2.rates}}
+    <v-btn color="success" @click="fetch($store.state.currency)">Change</v-btn>
     <h1 class="primary--text main-title" style="text-align: center;">Traveller Store</h1>
     <v-container grid-list-lg>
     <v-layout row wrap>
@@ -43,7 +44,15 @@
           <v-btn flat color="grey lighten-1">Buy Now</v-btn>
           <v-btn><nuxt-link :to="'/shop/'+item.slug" class="accent--text">Read more</nuxt-link></v-btn>
           <v-spacer></v-spacer>
-          <p v-if="item.discount_price==0" class="title" style="margin-right: 15px;">£{{item.price}}</p>
+          <p  v-if="item.discount_price==0" 
+              class="title" 
+              style="margin-right: 15px;"
+              >
+              £{{item.price}}
+              <span v-for="(item2, index) in data2.rates" :key="index">
+                {{item2}}
+              </span>
+            </p>
           <p v-else class="title red--text" style="margin-right: 15px; "><span class="grey--text" style="margin-right: 15px; text-decoration-line: line-through;">£{{item.price}}</span>£{{item.discount_price}}</p>
         </v-card-actions>
       </v-card>
@@ -69,33 +78,35 @@ export default {
         store.state.collectionsToken
     );
 
+
     return {
-      values: request1.data.entries
+      values: request1.data.entries,
+      
     };
   },
+    data() {
+      return {
+        show: false,
+        data: "",
+        data2: ""
+      };
+    },
   methods: {
     fetch(url) {
       var hello = url;
       return hello;
     },
 
-    async fetch(store) {
-			let amount = this.input;
-			const ip = await this.$axios.$get(
-        "https://api.exchangeratesapi.io/latest?base=GBP&symbols=" + store.state.currency
+    async fetch(to) {
+	    let amount = this.input;
+			const changeCurrency = await this.$axios.$get(
+        "https://api.exchangeratesapi.io/latest?base=GBP&symbols=" + to
         );
-        this.data2 = ip;
+        this.data2 = changeCurrency;
     }
   },
   
 
-  data() {
-    return {
-      show: false,
-      data: "",
-      data2: ""
-    };
-  },
   filters: {
     truncate(string, value) {
       return (string || "").substring(0, value);

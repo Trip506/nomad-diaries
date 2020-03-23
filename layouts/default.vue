@@ -23,8 +23,14 @@
 				<v-icon large color="accent" style="margin-left:10px">mdi-earth</v-icon>
 			</v-toolbar-title>
 			{{$store.state.currency}}
-			<v-btn color="success" @click="changeCurrency('EUR')">EUR</v-btn>
-			<v-btn color="success" @click="changeCurrency('GBP')">GBP</v-btn>
+			<v-select
+						@change="changeCurrency(currencyTo)"
+						v-model="currencyTo"
+						:items="currencylist"
+						label="Select"
+						hint="Pick your currency"
+						persistent-hint
+					></v-select>
 			<v-spacer />
 
 			<!-- <div class="accent--text">
@@ -94,6 +100,13 @@ export default {
 			clipped: false,
 			drawer: false,
 			fixed: false,
+			currencylist: [
+				'USD', 'GBP', 'EUR', 'JPY', 'BGN', 'CZK', 'DKK', 'HUF', 'PLN', 'RON',
+				'SEK', 'CHF', 'ISK', 'NOK', 'HRK', 'RUB', 'TRY', 'AUD', 'BRL', 'CAD',
+				'CNY', 'HKD', 'IDR', 'ILS', 'INR', 'KRW', 'MXN', 'MYR', 'NZD', 'BHP',
+				'SGD', 'THB', 'ZAR'
+			],
+			currencyTo:'',
 			navigation: [
 				{
 					icon: "mdi-home",
