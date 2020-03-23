@@ -23,12 +23,21 @@
                 <v-icon large color="accent" style="margin-left:10px">mdi-earth</v-icon>
             </v-toolbar-title>
 
-            <!-- <v-btn color="success" @click="changeCurrency('EUR')">EUR</v-btn> -->
-            <!-- <v-btn color="success" @click="changeCurrency('GBP')">GBP</v-btn> -->
-            <v-btn color="info" @click="setCurrency('EUR')">EUR</v-btn>
+    	<!--<v-btn color="success" @click="changeCurrency('EUR')">EUR</v-btn>
+       		<v-btn color="success" @click="changeCurrency('GBP')">GBP</v-btn> 
+  			<v-btn color="info" @click="setCurrency('EUR')">EUR</v-btn>
             <v-btn color="info" @click="setCurrency('GBP')">GBP</v-btn>
-            <v-btn color="info" @click="setCurrency('HRK')">HRK</v-btn>
+            <v-btn color="info" @click="setCurrency('HRK')">HRK</v-btn>-->
             <v-spacer />
+			<v-flex xs2>
+			<v-overflow-btn
+				dark
+				@change="setCurrency(newCurrency)"
+				:items="currencylist"
+				v-model="newCurrency"
+				label="Choose your currency"
+			></v-overflow-btn>
+			</v-flex>		
 
             <nuxt-link :to="'/cart'">
                 <v-btn color="success">Cart {{$store.state.cart.items.length}}</v-btn>
@@ -101,7 +110,14 @@ export default {
         return {
             clipped: false,
             drawer: false,
-            fixed: false,
+			fixed: false,
+			newCurrency:'',
+			currencylist: [
+				'USD', 'GBP', 'EUR', 'JPY', 'BGN', 'CZK', 'DKK', 'HUF', 'PLN', 'RON',
+				'SEK', 'CHF', 'ISK', 'NOK', 'HRK', 'RUB', 'TRY', 'AUD', 'BRL', 'CAD',
+				'CNY', 'HKD', 'IDR', 'ILS', 'INR', 'KRW', 'MXN', 'MYR', 'NZD', 'BHP',
+				'SGD', 'THB', 'ZAR'
+			],
             navigation: [
                 {
                     icon: "mdi-home",
