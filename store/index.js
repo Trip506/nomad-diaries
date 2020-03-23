@@ -54,28 +54,13 @@ export const mutations = {
 
 export const actions = {
 
-    // nuxtServerInit({ commit, state }) {
-    //     let collection = "bupaPractices";
-    //     // console.log("inited")
-    //     return axios.post(
 
-    //         state.webRoot + "/api/collections/get/" +
-    //         collection +
-    //         "?token=" + state.collectionsToken,
-    //         {
-    //             fields: { title: 1, slug: 1, image: 1 }
-    //         }
-    //     )
-    //         .then(res => {
-    //             commit("setNavigation", res.data);
-    //         });
-    // }
 
     async FETCH_EXCHANGE_RATE({ commit, state }, payload) {
 
         const { data } = await axios.get("https://api.exchangeratesapi.io/latest?base=" + state.defaultCurrency + "&symbols=" + payload)
         console.log("FETCHED EXCHANGE: " + data)
-        commit('setExchangeRate', data.rates[payload])
+        commit('setExchangeRate', Math.round(data.rates[payload] * 100) / 100)
         commit('setCurrency', payload)
 
     },

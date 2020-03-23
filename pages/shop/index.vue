@@ -22,6 +22,7 @@
 						</v-card-title>
 
 						<v-card-text>
+							{{item.price}}
 							<span v-show="!item.show">{{item.description | truncate(54)}}</span>
 							<span v-show="item.show">{{item.description}}</span>
 							<span style="margin-left: 45%;">
@@ -41,13 +42,14 @@
 								v-if="item.discount_price==0"
 								class="title"
 								style="margin-right: 15px;"
-							>{{$store.state.currency}}:{{exchange(item.price)}}</p>
+							>{{$store.state.currency}}:{{ Math.round($store.state.exchangeRate * item.price )}}</p>
+
 							<p v-else class="title red--text" style="margin-right: 15px; ">
 								<span
 									class="grey--text"
 									style="margin-right: 15px; text-decoration-line: line-through;"
-								>{{$store.state.currency}}:{{exchange(item.price)}}</span>
-								{{$store.state.currency}}:{{item.discount_price }}
+								>{{$store.state.currency}}:{{Math.round($store.state.exchangeRate * item.price)}}</span>
+								{{$store.state.currency}}:{{Math.round($store.state.exchangeRate * item.discount_price) }}
 							</p>
 						</v-card-actions>
 					</v-card>
