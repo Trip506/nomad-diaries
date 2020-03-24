@@ -15,14 +15,13 @@
                                 </v-flex>
 
                                 <span
-                                    v-if="item.discount_price!=0"
+                                    v-if="item.discount_price!=0 && item.discount_price < parseInt(item.price)"
                                     class="title red--text"
                                 >{{item.discount_price/item.price*100}}% OFF!</span>
                             </v-layout>
                         </v-card-title>
 
                         <v-card-text>
-                            {{item.price}}
                             <span v-show="!item.show">{{item.description | truncate(54)}}</span>
                             <span v-show="item.show">{{item.description}}</span>
                             <span style="margin-left: 45%;">
@@ -39,7 +38,7 @@
                             </v-btn>
                             <v-spacer></v-spacer>
                             <p
-                                v-if="item.discount_price==0"
+                                v-if="item.discount_price==0 || item.discount_price>=parseInt(item.price)"
                                 class="title"
                                 style="margin-right: 15px;"
                             >{{$store.state.currency}}:{{ Math.round($store.state.exchangeRate * item.price )}}</p>
