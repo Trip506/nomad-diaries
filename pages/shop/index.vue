@@ -1,6 +1,6 @@
 <template>
 	<div>
-		{{data2}}
+		<!-- {{data2}} -->
 		<h1 class="primary--text main-title" style="text-align: center;">Traveller Store</h1>
 		<v-container grid-list-lg>
 			<v-layout row wrap>
@@ -33,8 +33,15 @@
 						</v-card-text>
 
 						<v-card-actions>
-							<v-btn @click="cart(item)" flat color="grey lighten-1">Buy Now</v-btn>
-							<v-btn>
+							<v-btn
+								v-if="!item.inCart"
+								@click="item.inCart = !item.inCart; cart(item)"
+								color="primary lighten-1"
+							>Add to Cart</v-btn>
+
+							<!-- <v-btn @click="return function() {cart(item)} " color="red lighten-1">Add to Cart</v-btn> -->
+
+							<v-btn color="secondary">
 								<nuxt-link :to="'/shop/'+item.slug" class="accent--text">Read more</nuxt-link>
 							</v-btn>
 							<v-spacer></v-spacer>
@@ -84,7 +91,7 @@ export default {
 	computed: {},
 
 	methods: {
-		...mapMutations({ cart: "addToCart" }),
+		...mapMutations({ cart: "addToCart", remove: "removeFromCart" }),
 
 		fetch(url) {
 			var hello = url;
