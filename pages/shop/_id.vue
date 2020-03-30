@@ -1,54 +1,48 @@
 <template>
 	<div>
-    <h1 class="primary--text main-title" style="text-align: center;">Traveller Store</h1>
-    <v-container grid-list-lg>
+    <h1 class="primary--text main-title mb-10" style="text-align: center;">Traveller Store</h1>
+    <v-container grid-list-lg class="mt-10">
     <v-layout row wrap>
-    <v-flex xs12 sm6 lg4 v-for="(item, index) in values" :key="index">
-      <v-card>
+    <v-flex xs12 sm6>
+
         <v-img
-          :src="$store.state.assetRoot + item.image.path"
-          max-height="10cm"
+          :src="$store.state.assetRoot + values.image.path"
+          height="500px"
+          contain=""
         >
         </v-img>
+                            
 
-        <v-card-title primary-title>
-                            <v-layout align-content-space-between justify-space-between>
+    </v-flex>
+    <v-flex xs12 sm6>
+      <v-layout align-content-space-between justify-space-between>
                                 <v-flex>
-                                    <p class="headline d-flex">{{item.name}}</p>
+                                    <p class="headline d-flex">{{values.name}}</p>
                                 </v-flex>
 
                                 <span
-                                    v-if="item.discount_price!=0"
+                                    v-if="values.discount_price!=0"
                                     class="title red--text"
-                                >{{item.discount_price/item.price*100}}% OFF!</span>
+                                >{{values.discount_price/values.price*100}}% OFF!</span>
                             </v-layout>
-                        </v-card-title>
+ 
+          <p v-if="values.discount_price==0" class="title" style="margin-right: 15px;">£{{values.price}}</p>
+          <p v-else class="title red--text" style="margin-right: 15px; "><span class="grey--text" style="margin-right: 15px; text-decoration-line: line-through;">£{{values.price}}</span>£{{values.discount_price}}</p>
+                {{values.description}}
 
-        <v-card-text>
-            <span v-show="!item.show">
-                {{item.description | truncate(54)}}
-            </span>
-            <span v-show="item.show">
-                {{item.description}}
-            </span>
-            <span style="margin-left: 45%;">
-                <v-btn icon @click="item.show = !item.show">
-                    <v-icon>{{ !item.show ? 'mdi-chevron-down' : 'mdi-chevron-up' }}</v-icon>
-                </v-btn>
-            </span>
-         </v-card-text>
-
-        <v-card-actions>
+          <v-overflow-btn
+                    :items="dropdown_font"
+                    label="Overflow Btn"
+                    target="#dropdown-example"
+                  ></v-overflow-btn>
           <v-btn flat color="grey lighten-1">Buy Now</v-btn>
-          <v-btn><nuxt-link :to="'/shop/'+item.slug" class="accent--text">Read more</nuxt-link></v-btn>
-          <v-spacer></v-spacer>
-          <p v-if="item.discount_price==0" class="title" style="margin-right: 15px;">£{{item.price}}</p>
-          <p v-else class="title red--text" style="margin-right: 15px; "><span class="grey--text" style="margin-right: 15px; text-decoration-line: line-through;">£{{item.price}}</span>£{{item.discount_price}}</p>
-        </v-card-actions>
-      </v-card>
+
+   
+  
     </v-flex>
   </v-layout>
     </v-container>
+    
 
     </div>
 
@@ -70,7 +64,7 @@ export default {
     );
 
     return {
-      values: request1.data.entries
+      values: request1.data.entries[0]
     };
   },
   methods: {
