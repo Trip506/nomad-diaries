@@ -1,6 +1,8 @@
 <template>
 	<div>
+		<!-- {{$store.state.cart.items.map(element => element._id )}} -->
 		<!-- {{data2}} -->
+
 		<h1 class="primary--text main-title" style="text-align: center;">Traveller Store</h1>
 		<v-container grid-list-lg>
 			<v-layout row wrap>
@@ -32,14 +34,14 @@
 							</span>
 						</v-card-text>
 
+						<!-- v-if="!item.inCart" -->
 						<v-card-actions>
 							<v-btn
 								v-if="!item.inCart"
-								@click="item.inCart = !item.inCart; cart(item)"
+								@click="addToCart(item), item.inCart = true"
 								color="primary lighten-1"
 							>Add to Cart</v-btn>
-
-							<!-- <v-btn @click="return function() {cart(item)} " color="red lighten-1">Add to Cart</v-btn> -->
+							<v-btn v-else-if="$store.state.cart" disabled color="blue lighten-1">In cart</v-btn>
 
 							<v-btn color="secondary">
 								<nuxt-link :to="'/shop/'+item.slug" class="accent--text">Read more</nuxt-link>
@@ -69,6 +71,7 @@
 <script>
 import { mapGetters } from "vuex";
 import { mapMutations } from "vuex";
+import { mapActions } from "vuex";
 
 export default {
 	async asyncData({ $axios, route, store }) {
@@ -91,26 +94,44 @@ export default {
 	computed: {},
 
 	methods: {
-		...mapMutations({ cart: "addToCart", remove: "removeFromCart" }),
-
-		fetch(url) {
-			var hello = url;
-			return hello;
-		},
-
 		...mapGetters({
-			exchangeRate: "getExchangeRate"
+			exchangeRate: "getExchangeRate",
+			cart: "getCart"
+		}),
+
+		...mapActions({
+			pushCart: "pushToCart"
 		}),
 
 		exchange(value) {
 			return this.exchangeRate() * 5;
+		},
+
+		addToCart(item) {
+			let obj = {
+				id: item._id,
+				name: item.name,
+				description: item.description,
+				image: item.image,
+				price: item.price,
+				quantity: 1
+			};
+
+			this.pushCart(obj);
+		},
+
+		inCart(id) {
+			if (this.$store.state.cart[id]) {
+				return true;
+			}
 		}
 	},
 
 	data() {
 		return {
 			show: false,
-			data: ""
+			data: "",
+			cart: this.cart()
 		};
 	},
 	filters: {

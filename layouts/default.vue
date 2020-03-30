@@ -35,10 +35,7 @@
 				></v-overflow-btn>
 			</v-flex>
 
-			<v-btn
-				color="success"
-				@click.stop="rightDrawer = !rightDrawer"
-			>Cart {{$store.state.cart.items.length}}</v-btn>
+			<v-btn color="success" @click.stop="rightDrawer = !rightDrawer">Cart {{$store.state.cartLength}}</v-btn>
 
 			<nuxt-link :to="'/cart'">
 				<v-btn color="secondary lighten-2 ml-4">Edit cart</v-btn>
@@ -58,8 +55,9 @@
 						<v-btn color="success">Edit cart</v-btn>
 					</nuxt-link>
 					<v-layout column wrap>
-						<v-flex xs12 v-for="(item, index) in $store.state.cart.items" :key="index">
+						<v-flex xs12 v-for="(item, index) in $store.state.cart" :key="index">
 							{{item.name}}
+							{{item.quantity}}
 							<br />
 							{{$store.state.currency}}:{{Math.round($store.state.exchangeRate * item.price) }}
 							<br />
@@ -100,6 +98,8 @@
 <script>
 import { mapMutations } from "vuex";
 import { mapActions } from "vuex";
+import { mapGetters } from "vuex";
+
 export default {
 	components: {
 		LogoLink: () => import("@/components/core/LogoLink"),
@@ -215,7 +215,15 @@ export default {
 		},
 		goBack() {
 			this.$router.back();
-		}
+		},
+
+		countCart(obj) {
+			return this.cartLength;
+		},
+
+		...mapGetters({
+			cartLength: "getCartLength"
+		})
 	},
 
 	head() {

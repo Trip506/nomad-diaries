@@ -38,7 +38,9 @@ export const state = () => ({
 
     //cart
 
-    cart: { items: [] },
+
+    cart: {},
+    cartLength: 0,
 
 
 
@@ -47,7 +49,11 @@ export const state = () => ({
 
 export const mutations = {
 
-    addToCart: (state, payload) => (state.cart.items.push(payload)),
+    //Test
+    addToCart: (state, payload) => (state.cartLength++, state.cart[payload.id] = payload),
+    mutateCartLength: (state) => (state.cartLength == state.cartLength++),
+    ///
+
     removeFromCart: (state, payload) => (state.cart.items.splice(payload, 1)),
     setNavigation: (state, payload) => (state.navigation = payload),
     setPage: (state, payload) => (state.page = payload),
@@ -71,9 +77,20 @@ export const actions = {
 
     },
 
+    pushToCart({ commit, state }, payload) {
+        if (!state.cart[payload._id]) {
+            commit('addToCart', payload)
+
+        }
+
+    },
+
 }
 
 export const getters = {
-    getExchangeRate: state => state.exchangeRate
+    getExchangeRate: state => state.exchangeRate,
+    getCart: state => state.cart,
+    getCartLength: state => Object.keys(state.cart).length,
 }
+
 
