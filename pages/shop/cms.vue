@@ -50,14 +50,16 @@ export default {
 					"?token=" +
 					this.$store.state.masterToken,
 				{
-					data: [
+					data: 
 						{
-							name: "name"
-						},
-						{
-							name: "name"
+							name: "name",
+							description:"Description",
+							price:Math.ceil(Math.random() * (300 - 1) + 1),
+							image:{
+                                    path: "/2020/04/10/5e90925f5bf86placeholder.png",
+                                   // title: "placeholder.png"
+                                }
 						}
-					]
 				}
 			);
 			return window.location.reload(true);
