@@ -194,6 +194,11 @@ export default {
 					icon: "mdi-home",
 					title: "Shop",
 					to: "/shop"
+				},
+				{
+					icon: "mdi-home",
+					title: "Shop CMS",
+					to: "/shop/cms"
 				}
 			],
 			miniVariant: false,
