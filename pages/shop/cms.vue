@@ -60,7 +60,7 @@ export default {
 					]
 				}
 			);
-			window.location.reload(true);
+			return window.location.reload(true);
 		}
 	},
 
